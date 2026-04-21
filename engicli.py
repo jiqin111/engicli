@@ -8,6 +8,7 @@ from pathlib import Path
 
 # ====================== 你的配置 ======================
 BASE_URL = "https://web-release.iheatingos.com/digital-service"
+USER_BASE_URL = "https://web-release.iheatingos.com/user-service"  # 用户服务独立域名
 LOGIN_PAGE = "https://web-release.iheatingos.com/engipower-refactoring"
 TOKEN_KEY = "MYTOKEN"
 CLI_CONFIG = Path.home() / ".heating-cli"
@@ -92,7 +93,7 @@ def logout():
         os.remove(TOKEN_FILE)
         click.echo("✅ 已退出")
 
-# ====================== 业务命令：只返回10条 ======================
+# ====================== 业务命令：获取站点列表 ======================
 @cli.command("list_stations")
 def list_stations():
     """获取站点列表（只显示2条，不刷屏）"""
@@ -116,6 +117,26 @@ def list_stations():
         print(json.dumps(result, ensure_ascii=False, indent=2))
     except Exception as e:
         print(f"请求失败：{e}")
+
+ # ====================== 新增：用户列表接口 ======================
+@cli.command("user_list")
+def user_list():
+     """获取用户列表"""
+     url = f"{USER_BASE_URL}/system/user/list"
+
+     params = {
+         "pageNum": 1,
+         "pageSize": 10,
+         "powerId": "userList",
+         "status": 0,
+     }
+
+     try:
+         res = requests.get(url, headers=get_headers(), params=params, timeout=15)
+         result = res.json()
+         print(json.dumps(result, ensure_ascii=False, indent=2))
+     except Exception as e:
+         print(f"请求失败：{e}")
 
 if __name__ == "__main__":
     cli()
