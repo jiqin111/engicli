@@ -1,6 +1,6 @@
 {
     "name": "@engiproject/engicli",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "preferGlobal": true,
     "bin": {
         "engicli": "run.js"
@@ -12,5 +12,8 @@
         "run.js",
         "install.js",
         "engicli.exe"
-    ]
+    ],
+    "dependencies": {
+        "node-fetch": "^3.3.2"
+    }
 }
