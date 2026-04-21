@@ -1,0 +1,16 @@
+{
+    "name": "@engiproject/engicli",
+    "version": "1.0.1",
+    "preferGlobal": true,
+    "bin": {
+        "engicli": "run.js"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "files": [
+        "run.js",
+        "install.js",
+        "engicli.exe"
+    ]
+}
